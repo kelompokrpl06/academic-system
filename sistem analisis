@@ -1,0 +1,156 @@
+SYSTEM ANALYSIS – PROJECT CARTER
+1. Deskripsi Sistem
+Project Carter adalah sistem informasi akademik berbasis web yang dirancang untuk membantu mahasiswa dalam mengelola berbagai aktivitas akademik dalam satu platform. Sistem ini mencakup fitur pengisian KRS, evaluasi dosen (EDOM), konsultasi bimbingan akademik, pengajuan revisi nilai, dan akses tagihan kuliah.
+
+2. Latar Belakang
+Dalam proses akademik di perguruan tinggi, masih banyak kegiatan yang dilakukan secara terpisah atau manual, seperti pengisian KRS, konsultasi dengan dosen, hingga pengajuan revisi nilai. Hal ini sering menyebabkan keterlambatan, kesalahan data, serta kurang efisiennya waktu.
+Selain itu, mahasiswa juga kesulitan dalam mengakses informasi seperti tagihan kuliah dan hasil evaluasi dosen. Oleh karena itu, dibutuhkan sistem terintegrasi yang dapat mengelola seluruh proses akademik secara digital agar lebih efektif dan efisien.
+
+3. Identifikasi Masalah
+Pengisian KRS masih membingungkan dan rawan kesalahan 
+Evaluasi dosen belum terkelola dengan baik 
+Konsultasi akademik sulit dilakukan 
+Pengajuan revisi nilai tidak terstruktur 
+Informasi tagihan kuliah sulit diakses 
+
+4. Tujuan Sistem
+Mempermudah mahasiswa dalam mengelola aktivitas akademik 
+Mengintegrasikan semua layanan akademik dalam satu sistem 
+Meningkatkan efisiensi dan akurasi data 
+Memberikan akses informasi yang cepat dan mudah 
+
+5. Solusi Sistem
+Project Carter menyediakan:
+KRS online 
+EDOM (evaluasi dosen) 
+Konsultasi bimbingan akademik 
+Pengajuan revisi nilai 
+Informasi tagihan kuliah 
+
+6. Analisis Kebutuhan Sistem
+A. Kebutuhan Fungsional
+Mahasiswa dapat login ke sistem 
+Mahasiswa dapat mengisi dan menyimpan KRS 
+Mahasiswa dapat mengisi EDOM 
+Mahasiswa dapat melakukan konsultasi akademik 
+Mahasiswa dapat mengajukan revisi nilai 
+Mahasiswa dapat melihat tagihan kuliah 
+Dosen dapat merespon konsultasi 
+Admin dapat mengelola seluruh data sistem 
+
+B. Kebutuhan Non-Fungsional
+Sistem mudah digunakan (user friendly) 
+Sistem dapat diakses 24 jam 
+Keamanan data terjamin 
+Sistem memiliki performa yang cepat 
+
+7. Aktor Sistem
+Mahasiswa : pengguna utama 
+Dosen :memberikan respon & evaluasi 
+Admin :mengelola sistem 
+
+8. Analisis Proses Sistem
+1. KRS
+Mahasiswa login -memilih mata kuliah - sistem validasi - data disimpan
+2. EDOM
+Mahasiswa mengisi form evaluasi -sistem menyimpan hasil
+3. Konsultasi Akademik
+Mahasiswa mengirim pesan - dosen membalas -tersimpan di sistem
+4. Revisi Nilai
+Mahasiswa mengajukan revisi - dosen memproses -status diperbarui
+5. Tagihan Kuliah
+Mahasiswa membuka menu - sistem menampilkan tagihan
+
+9. Kesimpulan
+Project Carter merupakan solusi sistem informasi akademik yang terintegrasi untuk mempermudah proses administrasi dan aktivitas mahasiswa. Dengan sistem ini, diharapkan semua proses akademik menjadi lebih efisien, cepat, dan terstruktur.
+
+DATABASE SYSTEM – PROJECT CARTER
+1. Deskripsi Database
+Database Project Carter digunakan untuk menyimpan dan mengelola seluruh data akademik mahasiswa seperti KRS, EDOM, bimbingan akademik, revisi nilai, dan tagihan kuliah. Database ini dirancang menggunakan model relasional agar data saling terhubung dan terstruktur dengan baik.
+
+2. Struktur Tabel
+2.1 Tabel User
+Field	Tipe Data	Keterangan
+Id _user	Int (Pk,Al)	Id_user
+Nama	Varchar(100)	Nama
+Email	Varchar(100)	Email
+Password	Varchar(225)	Password
+Rule	Enum	Mahasiswa,Dosen,admim
+
+2.2 Tabel Mahasiswa
+Menyimpan data mahasiswa.
+Field	Tipe Data	Keterangan
+Nim	Varchar (15)(Pk)	Nim
+Id_user	Int (Fk)	Relasi user
+Jurusan	Varchar(100)	Jurusan
+angakatan	int	Tahun masuk
+2.3 Tabel Dosen
+Menyimpan data dosen.
+Field	Tipe Data	Keterangan
+Nidn	Varchar (15)(Pk)	ID Dosen
+Id_user	Int(Fk)	Relasi ke user
+prodi	Varchar (100)	Program Studi
+
+2.4 Tabel Mata_Kuliah
+Menyimpan data mata kuliah.
+Field	Tipe Data	Keterangan
+Kode_mk	Varchar (10)	Kode_mk
+Nama _mk	Varchar(100)	Nama mata kuliah
+Status	Int	Jumlah sks
+nidn	Varchar(15)	Dosen pengampu
+
+2.5 Tabel KRS
+Menyimpan data pengambilan mata kuliah oleh mahasiswa.
+Field	Tipe Data	Keterangan
+Id_krs	Int (Pk) (Al)	Id _krs
+Nim	Varchar(10)Fk	Mahasiswa
+Kode_mk	Varchar(10)Fk	Mata kuliah
+semester	int	semester
+
+2.6 Tabel EDOM
+Menyimpan hasil evaluasi dosen oleh mahasiswa.
+Field	Tipe Data	Keterangan
+Id _edom	Int (Pk,Al)	Id_
+Nim	Varchar(15)Fk	Mahasiswa
+Nidn	Varchar(15)Fk	Dosen
+Nilai	Int	Nilai evaluasi
+komentar	Text	saran
+
+2.7 Tabel Bimbingan
+Menyimpan data konsultasi akademik.
+Field	Tipe Data	Keterangan
+Id _bimbingan	Int (Pk,Al)	Id_
+Nim	Varchar(15)Fk	Mahasiswa
+Nidn	Varchar(15)Fk	Dosen
+Pesan	Text	Isi konsuktasi
+Tanggal	Date	Tanggal
+2.8 Tabel Revisi_Nilai
+Menyimpan pengajuan revisi nilai.
+Field	Tipe Data	Keterangan
+Id _revisi	Int (Pk,Al)	Id_
+Nim	Varchar(15)Fk	Mahasiswa
+Kode_mk	Varchar(15)Fk	Mata kuliah
+Alasan	Text	Alasan revisi
+Status	Enum	Pending/disetujui/di tolak
+
+2.9 Tabel Tagihan
+Menyimpan data tagihan kuliah mahasiswa
+Field	Tipe Data	Keterangan
+Id _tagihan	Int (Pk,Al)	Id_
+Nim	Varchar(15)Fk	Mahasiswa
+Jumlah	Desimal(10,2)	Total tagihan
+Status	Enum	Lunas/belum
+Tanggal	Date	Tanggal tagihan
+
+3. Relasi Antar Tabel
+Users :Mahasiswa (1:1) 
+Users : Dosen (1:1) 
+Mahasiswa :KRS (1:M) 
+Mahasiswa :EDOM (1:M) 
+Mahasiswa :Bimbingan (1:M) 
+Mahasiswa :Revisi Nilai (1:M) 
+Mahasiswa :Tagihan (1:M) 
+Dosen :Mata Kuliah (1:M) 
+Dosen : Bimbingan (1:M) 
+4.Kesimpulan
+Database Project Carter dirancang untuk mendukung seluruh proses akademik dalam satu sistem terintegrasi. Dengan struktur tabel dan relasi yang jelas, data dapat dikelola dengan lebih efektif, mengurangi kesalahan, serta mempermudah akses informasi bagi pengguna.
